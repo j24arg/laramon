@@ -51,9 +51,23 @@ footer>ul a{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;  
+
 }
 
+.botona{
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 8%;
+    display: inline-block;
+}
+.tarjeta {
+    border:solid black 1px;
+    border-radius: 10%;
+    
+    background-color: antiquewhite;  
+
+}
 .title {
     font-size: 84px;
 }
@@ -67,7 +81,9 @@ footer>ul a{
     text-decoration: none;
     text-transform: uppercase;
 }
-
+.list{
+    text-decoration: none;
+}
 .m-b-md {
     margin-bottom: 30px;
 }

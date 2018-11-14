@@ -7,7 +7,7 @@ use App\Type;
 
 class Pokemon extends Model
 {
-    public function tipo(){
+    public function tipo() {
         return $this->belongsTo(Type::class);
     }
 }

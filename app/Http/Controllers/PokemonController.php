@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pokemon;
+use App\Type;
 use Illuminate\Http\Request;
 
 class PokemonController extends Controller
@@ -14,7 +15,8 @@ class PokemonController extends Controller
      */
     public function todos() //Ver la lista de Pokémon
     {
-        //
+        $todosPokemons = Pokemon::all();
+        return view("Pokemon.index")->with('Pokemons', $todosPokemons);
     }
 
     /**
@@ -46,7 +48,19 @@ class PokemonController extends Controller
      */
     public function uno(Pokemon $pokemon) //Ver el detalle de un Pokémon
     {
-        //
+        $tipo = Type::find($pokemon->type_id);
+
+        // Ejemplo 1
+        $data = [
+            'poke'=>$pokemon,
+            'tipo'=>$tipo,
+        ];
+        return view('Pokemon.pokecard', $data);
+
+        // Ejemplo 2
+
+        // return view('Pokemon.pokecard')->with('poke', $pokemon)->with('tipo', $tipo);
+
     }
 
     /**
@@ -57,7 +71,7 @@ class PokemonController extends Controller
      */
     public function editar(Pokemon $pokemon)// Modificar un Pokémon
     {
-        //
+        return view('Pokemon.editar')->with('poke', $pokemon);
     }
 
     /**
@@ -69,7 +83,14 @@ class PokemonController extends Controller
      */
     public function actualizar(Request $request, Pokemon $pokemon)// Modificar un Pokémon
     {
-        //
+        $pokemon->name = $request->input('name');
+        $pokemon->weight = $request->input('weight');
+        $pokemon->height = $request->input('height');
+        $pokemon->evolves = $request->input('evolves');
+
+        $pokemon->save();
+
+        return redirect('/pokemon/'.$pokemon->id);
     }
 
     /**
@@ -80,6 +101,7 @@ class PokemonController extends Controller
      */
     public function borrar(Pokemon $pokemon)//Eliminar un Pokémon
     {
-        //
+        $pokemon->delete();
+        return redirect('/pokemon/');
     }
 }
